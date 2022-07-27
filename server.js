@@ -6,14 +6,18 @@ const cors = require('cors')
 const ownerRoutes = require('./routes/ownerRoutes')
 const truckRoutes = require('./routes/truckRoutes')
 const userRoutes = require('./routes/userRoutes')
+const passport = require('passport')
 
 require('dotenv').config()
 require('./config/connections')
+require('./config/passport')
 
 app.use(cors())
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+app.use(passport.initialize())
+
 app.use('/owner', ownerRoutes)
 app.use('/truck', truckRoutes)
 app.use('/user', userRoutes)

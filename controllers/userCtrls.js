@@ -1,8 +1,8 @@
 const User = require('../models/User')
+const passport = require('passport');
+const passportConfig = require('../config/passport')
+const JWT = require('jsonwebtoken');
 
-const index = (req, res) => {
-    
-}
 const createUser = (req, res) => {
     User.create(req.body, (err, createdUser) => {
         if (err) {
@@ -23,7 +23,6 @@ const deleteUser = (req, res) => {
 }
 
 module.exports = {
-    index,
     createUser,
     deleteUser
 }
