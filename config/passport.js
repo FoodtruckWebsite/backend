@@ -17,10 +17,13 @@ const cookieExtractor = (req, res) => {
 
 // authorization
 passport.use(new JwtStrategy({
+    // extracts the token from the request
+    // requires cookie-parser to work properly
     jwtFromRequest: cookieExtractor,
+    // secretOrKey verifies the token is legitimate
     secretOrKey: 'NomOnWheels'
 }, (payload, done) => {
-    User.findById({_id: payload.sub}, (err,user) => {
+    User.findById({_id: payload.userID}, (err,user) => {
         if (err) {
             return done(err, false)
         }
