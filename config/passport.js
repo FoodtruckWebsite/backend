@@ -24,12 +24,15 @@ passport.use(new JwtStrategy({
     secretOrKey: 'NomOnWheels'
 }, (payload, done) => {
     User.findById({_id: payload.userID}, (err,user) => {
+        // checks if there's an error
         if (err) {
             return done(err, false)
         }
+        // checks if the user exist
         if (user) {
             return done(null, user)
         }
+        // there was no error and user doesn't exist
         else {
             return done(null, false)
         }
