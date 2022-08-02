@@ -5,9 +5,10 @@ const showAllTrucks = (req, res) => {
         if (err) {
             res.status(400).json(err)
             return
-    }
-    res.json(trucks)
-})
+        }
+        console.log('Truck= ' + typeof(trucks))
+        res.json(trucks)
+    })
 }
 const truckDetails = (req, res) => {
     Truck.findById(req.params.truckId, (err, truck) => {

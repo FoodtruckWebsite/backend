@@ -1,7 +1,10 @@
+require('dotenv').config()
 require('./connections')
 const User = require('../models/User')
 const Truck = require('../models/Truck')
 const Owner = require('../models/Owner')
+
+
 
 const user = [
     {
@@ -42,33 +45,30 @@ const owner = [
     trucks: []
 }
 ]
-
-User.deleteMany({})
+const userPromise = User.deleteMany({})
 .then(() => {
-    console.log('inserted user')
+    console.log('inserted User')
     return User.insertMany(user)
 })
 .catch(err => console.error(err))
-.finally(() => {
-    process.exit()
-})
 
-Owner.deleteMany({})
+
+const ownerPromise = Owner.deleteMany({})
 .then(() => {
     console.log('inserted Owner')
     return Owner.insertMany(owner)
 })
 .catch(err => console.error(err))
-.finally(() => {
-    process.exit()
-})
 
-Truck.deleteMany({})
+
+const truckPromise = Truck.deleteMany({})
 .then(() => {
     console.log('inserted Truck')
     return Truck.insertMany(truck)
-})
-.catch(err => console.error(err))
+}).catch(err => console.error(err))
+
+Promise.all([userPromise,ownerPromise, truckPromise])
 .finally(() => {
+    console.log('Exiting')
     process.exit()
 })
