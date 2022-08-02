@@ -1,12 +1,17 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
+const OwnerSchema = new mongoose.Schema({
+    trucks: [{type: mongoose.Schema.Types.ObjectId, ref: 'truck'}],
+})
+
 const UserSchema = new mongoose.Schema({
     avatar: String,
     username:  {type: String, required: true},
     email:  {type: String, required: true},
     password:  {type: String, required: true},
-    owner: {type: Boolean, default: false, required: true}
+    role: {type: String, required: true},
+    owner: [OwnerSchema]
 })
 
 UserSchema.pre('save', function(next) {

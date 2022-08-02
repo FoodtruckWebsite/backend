@@ -9,7 +9,7 @@ const MenuSchema = new mongoose.Schema({
 
 const TruckSchema = new mongoose.Schema({
     name: String,
-    catagory: String,
+    category: String,
     tags: [],
     menu: [MenuSchema],
     rating: Number,
